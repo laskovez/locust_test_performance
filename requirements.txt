@@ -1,0 +1,4 @@
+locust
+requests
+python-dotenv
+requests_toolbelt
