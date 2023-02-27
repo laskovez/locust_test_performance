@@ -3,7 +3,8 @@ import random
 from locust import HttpUser, TaskSet, task, between
 
 from helpers.data_generators import generate_pet_data, generate_order_data
-from helpers.helpers import get_auth_token, get_random_image_file, check_response
+from helpers.helpers import get_auth_token, get_random_image_file
+from tests import check_response
 
 
 class SmokeTestSet(TaskSet):
@@ -39,7 +40,6 @@ class SmokeTestSet(TaskSet):
 
         with self.client.post(f'/pet/{pet_id}/uploadImage', files=files, catch_response=True) as response:
             check_response(response, 200, 1)
-
 
 class SmokeTestUser(HttpUser):
     tasks = [SmokeTestSet]

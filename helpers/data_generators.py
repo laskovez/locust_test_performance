@@ -9,7 +9,7 @@ def generate_pet_data() -> dict:
     tags = [{"id": random.randint(1, 100), "name": "tag name"}]
     status = random.choice(["available", "pending", "sold"])
     return {
-        "id": random.randint(1, 100),
+        "id": random.randint(1, 1000000000),
         "category": category,
         "name": f"pet name {random.randint(1, 100)}",
         "photoUrls": photo_urls,
