@@ -1,6 +1,6 @@
 # Python Performance tests for Pet Store
 
-# Before run the tests:
+## Before run the tests:
 1. Install Python 3.6+
 2. Install dependencies: pip install -r requirements.txt
 
