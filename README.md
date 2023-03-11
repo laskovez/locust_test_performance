@@ -21,7 +21,7 @@ To increase the maximum possible server load created by your computer, use docke
 Because Python cannot fully utilize more than one core per process, you should typically run
 one worker instance per processor core on the worker machines in order to utilize all their computing power.
 
-1. Update locust file in `docker-compose.yml` for both: master and worker containers 
+1. Update locust file in `docker-compose.yml` for both: master and worker services 
 2. Run `docker build -t locust .` for building the base locust image
 3. Run `docker-compose up --scale worker=n`, n - number of workers. 
 4. Open the http://localhost:8089/ in browser 
@@ -31,7 +31,7 @@ one worker instance per processor core on the worker machines in order to utiliz
 ## To run tests in docker-container's without UI
 
 1. Add `--headless` option for master service command in `docker-compose.yml`
-2. Update locust file in docker-compose.yml for both: master and worker containers 
+2. Update locust file in `docker-compose.yml` for both: master and worker services 
 3. Configure number of users, spawn rate and run time in `locust.conf` file
 4. Run `docker build -t locust .` for building the base locust image
 5. Run `docker-compose up --scale worker=n`, n - number of workers. 
