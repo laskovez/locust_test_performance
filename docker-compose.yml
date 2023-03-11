@@ -1,0 +1,24 @@
+version: '3'
+services:
+  master:
+    image: locust
+    ports:
+      - "8089:8089"
+    command: -f /locust/tests/smoke_load_test.py --master --config=/locust/locust.conf --html /locust/reports/report_docker.html
+    volumes:
+      - ./:/locust
+    environment:
+      - PYTHONPATH=/locust
+  worker:
+    image: locust
+    command: -f /locust/tests/smoke_load_test.py --worker --master-host master
+    volumes:
+      - ./:/locust
+    depends_on:
+      - master
+    environment:
+      - LOCUST_MODE=worker
+      - PYTHONPATH=/locust
+    deploy:
+      mode: replicated
+      replicas: 3

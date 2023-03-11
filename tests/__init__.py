@@ -1,13 +1,10 @@
-import os
-import random
-import time
+import logging
 from json import JSONDecodeError
+from typing import Union
 
-from locust.clients import Response as LocustResponse
 import requests
-from dotenv import load_dotenv
-from typing import BinaryIO, Callable, Type, Union
-from locust import HttpUser
+from locust import events
+from locust.clients import Response as LocustResponse
 
 
 def check_response(response:  Union[LocustResponse, requests.Response], expected_status_code: int,
@@ -38,3 +35,15 @@ def check_response(response:  Union[LocustResponse, requests.Response], expected
         response.success()
 
     return response_body
+
+
+@events.quitting.add_listener
+def check_test_results(environment):
+    if environment.stats.total.fail_ratio > 0.02:
+        logging.error("Test failed due to failure ratio > 2%")
+        environment.process_exit_code = 1
+    elif environment.stats.total.avg_response_time > 500:
+        logging.error("Test failed due to average response time > 500 ms")
+        environment.process_exit_code = 1
+    else:
+        environment.process_exit_code = 0

@@ -1,13 +1,9 @@
 import os
 import random
-import time
-from json import JSONDecodeError
+from typing import BinaryIO
 
-from locust.clients import Response as LocustResponse
 import requests
 from dotenv import load_dotenv
-from typing import BinaryIO, Callable, Type, Union
-from locust import HttpUser
 
 load_dotenv()
 
@@ -22,7 +18,8 @@ def get_auth_token(host: str, email: str = None, password: str = None) -> str:
 
 
 def get_random_image_file() -> BinaryIO:
-    files = os.listdir("test_data")
+    files_directory = os.path.dirname(os.path.realpath(__file__)) + "/../test_data"
+    files = os.listdir(files_directory)
     image_files = [file for file in files if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png")]
 
-    return open(os.path.join("test_data", random.choice(image_files)), "rb")
+    return open(os.path.join(files_directory, random.choice(image_files)), "rb")
