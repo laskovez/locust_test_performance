@@ -16,7 +16,7 @@
 3. Once testing finished, check stats in html report
 
 
-## To run tests in docker-container's with UI
+## To run tests in docker-containers with UI
 To increase the maximum possible server load created by your computer, use docker.
 Because Python cannot fully utilize more than one core per process, you should typically run
 one worker instance per processor core on the worker machines in order to utilize all their computing power.
@@ -28,7 +28,7 @@ one worker instance per processor core on the worker machines in order to utiliz
 5. Set the number of users and spawn rate and click "Start swarming"
 6. Monitor stats on "Statistics", "Charts" etc. tabs
 
-## To run tests in docker-container's without UI
+## To run tests in docker-containers without UI
 
 1. Add `--headless` option for master service command in `docker-compose.yml`
 2. Update locust file in `docker-compose.yml` for both: master and worker services 
