@@ -11,7 +11,7 @@ load_dotenv()
 def get_auth_token(host: str, email: str = None, password: str = None) -> str:
     username = email or os.environ.get('USERNAME')
     password = password or os.environ.get('PASSWORD')
-    response = requests.get(host + f'/user/login?username={username}&password={password}')
+    response = requests.get(host + f'/user/login?username={username}&password={password}', timeout=10)
     response_json = response.json()
     auth_token = response_json['message']
     return auth_token
